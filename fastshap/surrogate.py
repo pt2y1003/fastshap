@@ -10,8 +10,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLRO
 from datetime import datetime
 import os
 
-from fastshap.utils import ShapleySampler
+from fastshap.fastshap.utils import ShapleySampler
 
+from tensorflow import python as tf_python
 
 class Surrogate:
     
@@ -63,8 +64,8 @@ class Surrogate:
             
         # Data
         #Check if Provided TF Dataset, if So X should be paired with model predictions
-        if (isinstance(train_data, tf.python.data.ops.dataset_ops.PrefetchDataset)              
-            or isinstance(train_data, tf.python.data.ops.dataset_ops.MapDataset)): 
+        if (isinstance(train_data, tf_python.data.ops.dataset_ops.PrefetchDataset)              
+            or isinstance(train_data, tf_python.data.ops.dataset_ops.MapDataset)): 
             @tf.function
             def make_prediction_data(x, y):
                 with tf.device(device):
@@ -219,8 +220,8 @@ class ImageSurrogate:
         
         # Data
         #Check if Provided TF Dataset, if So X should be paired with model predictions
-        if (isinstance(train_data, tf.python.data.ops.dataset_ops.PrefetchDataset)              
-            or isinstance(train_data, tf.python.data.ops.dataset_ops.MapDataset)): 
+        if (isinstance(train_data, tf_python.data.ops.dataset_ops.PrefetchDataset)              
+            or isinstance(train_data, tf_python.data.ops.dataset_ops.MapDataset)): 
             @tf.function
             def make_prediction_data(x, y):
                 with tf.device(device):

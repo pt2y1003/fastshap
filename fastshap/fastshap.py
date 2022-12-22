@@ -11,7 +11,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLRO
 from datetime import datetime
 import os
 
-from fastshap.utils import convert_to_linkTF, convert_to_link, ShapleySampler
+from fastshap.fastshap.utils import convert_to_linkTF, convert_to_link, ShapleySampler
+
+from tensorflow import python as tf_python
 
 class EfficiencyNormalization(Layer):
     '''
@@ -143,7 +145,7 @@ class FastSHAP:
             os.makedirs(self.model_dir)
         
         # Data (get dummy labels)
-        if not (isinstance(train_data,tf.python.data.ops.dataset_ops.PrefetchDataset) or isinstance(train_data, tf.python.data.ops.dataset_ops.MapDataset)): 
+        if not (isinstance(train_data,tf_python.data.ops.dataset_ops.PrefetchDataset) or isinstance(train_data, tf_python.data.ops.dataset_ops.MapDataset)): 
             y_train_dummy = np.zeros((train_data.shape[0],1))
             y_val_dummy = np.zeros((val_data.shape[0],1))
             train_data = tf.data.Dataset.from_tensor_slices((train_data, y_train_dummy)).batch(batch_size)

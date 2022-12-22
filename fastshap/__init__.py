@@ -1,4 +1,4 @@
-from fastshap import utils
-from .fastshap import FastSHAP, EfficiencyNormalization
-from .surrogate import Surrogate, ImageSurrogate
-from .utils import ShapleySampler
+from fastshap.fastshap import utils
+from fastshap.fastshap.fastshap import FastSHAP, EfficiencyNormalization
+from fastshap.fastshap.surrogate import Surrogate, ImageSurrogate
+from fastshap.fastshap.utils import ShapleySampler
